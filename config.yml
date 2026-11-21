@@ -5,7 +5,7 @@ backend:
 
 locale: uk
 site_url: /
-media_folder: public/images
+media_folder: images
 public_folder: /images
 
 collections:
@@ -16,7 +16,7 @@ collections:
     files:
       - name: content
         label: Тексти, фото і ціни
-        file: src/content/site.json
+        file: site.json
         fields:
           - label: Головний екран
             name: hero
