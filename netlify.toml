@@ -1,6 +1,7 @@
+# Файли в репозиторії лежать без папок, тому перед збіркою розкладаємо їх у структуру Astro
 [build]
-  command = "npm run build"
-  publish = "dist"
+command = "mkdir -p src/pages src/content public/images public/admin && cp index.astro dyakuyu.astro src/pages/ && cp site.json src/content/ && cp styles.css src/ && cp *.jpg public/images/ && cp config.yml public/admin/config.yml && cp index.html public/admin/index.html && (cp -r images/. public/images/ 2>/dev/null || true) && npm run build"
+publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "22"
+NODE_VERSION = "22"
