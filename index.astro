@@ -1,0 +1,232 @@
+---
+import site from '../content/site.json';
+import '../styles.css';
+
+const ig = site.contacts.instagram;
+const dm = `https://ig.me/m/${ig}`;
+const igUrl = `https://www.instagram.com/${ig}/`;
+const tg = site.contacts.telegram?.replace(/^@/, '');
+const pad = (i: number) => String(i + 1).padStart(2, '0');
+---
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{site.seo.title}</title>
+  <meta name="description" content={site.seo.description} />
+  <meta property="og:title" content={site.seo.title} />
+  <meta property="og:description" content={site.seo.description} />
+  <meta property="og:image" content={site.hero.photo} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<header>
+  <nav class="wrap nav" aria-label="Головне меню">
+    <a class="logo" href="#top">Мар'яна Мац</a>
+    <ul class="menu" id="menu">
+      <li><a href="#about">Про мене</a></li>
+      <li><a href="#topics">З чим працюю</a></li>
+      <li><a href="#approach">Підхід</a></li>
+      <li><a href="#prices">Формати і ціни</a></li>
+      <li><a href="#faq">Питання</a></li>
+      <li><a href="#contact">Контакти</a></li>
+    </ul>
+    <a class="btn btn-fill" href={dm} target="_blank" rel="noopener">Записатись</a>
+    <button class="burger" id="burger" aria-label="Відкрити меню" aria-expanded="false" aria-controls="menu">☰</button>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="h1">
+    <div class="hero-text">
+      <p class="eyebrow reveal">{site.hero.eyebrow}</p>
+      <h1 id="h1" class="reveal"><span>{site.hero.title_line1}</span><span><em>{site.hero.title_line2}</em></span></h1>
+      <p class="hero-sub reveal"><b>{site.hero.lead_bold}</b> {site.hero.lead}</p>
+      <div class="cta-row reveal">
+        <a class="btn btn-fill" href={dm} target="_blank" rel="noopener">{site.hero.button}</a>
+        <a class="btn btn-ghost" href="#about">Моя історія</a>
+      </div>
+      <div class="facts reveal">
+        {site.hero.facts.map((f) => <div><b>{f.number}</b>{f.text}</div>)}
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src={site.hero.photo} alt="Мар'яна Мац" />
+      <span class="hero-cap">@{ig}</span>
+    </div>
+  </section>
+
+  <section class="band" aria-label="Цитата">
+    <img src={site.quote.photo} alt="" loading="lazy" />
+    <blockquote>
+      <p>{site.quote.text}</p>
+      <cite>Мар'яна Мац</cite>
+    </blockquote>
+  </section>
+
+  <section id="about">
+    <div class="wrap about">
+      <figure>
+        <img src={site.about.photo} alt="Портрет Мар'яни Мац" loading="lazy" />
+        <figcaption>{site.about.caption}</figcaption>
+      </figure>
+      <div class="about-body">
+        <p class="eyebrow">Про мене</p>
+        <h2 set:html={site.about.title} />
+        {site.about.paragraphs.map((p) => <p class="lead">{p.text}</p>)}
+        <ol class="story">
+          {site.about.story.map((s) => (
+            <li><span class="when">{s.when}</span><div><h3>{s.title}</h3><p>{s.text}</p></div></li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="topics">
+    <div class="wrap">
+      <div class="head">
+        <div><p class="eyebrow">З чим працюю</p><h2 style="margin-top:18px" set:html={site.topics.title} /></div>
+        <p class="lead">{site.topics.lead}</p>
+      </div>
+      <div class="topics">
+        {site.topics.items.map((t, i) => (
+          <div class="topic"><span class="n">{pad(i)}</span><h3>{t.title}</h3><p>{t.text}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="approach" class="approach">
+    <div class="wrap approach-grid">
+      <div>
+        <p class="eyebrow">Підхід</p>
+        <h2 style="margin-top:18px" set:html={site.approach.title} />
+        <p class="lead" style="margin-top:22px">{site.approach.lead}</p>
+        <div class="pillars">
+          {site.approach.pillars.map((p) => <div class="pillar"><h3>{p.title}</h3><p>{p.text}</p></div>)}
+        </div>
+      </div>
+      <img src={site.approach.photo} alt="Мар'яна Мац" loading="lazy" />
+    </div>
+  </section>
+
+  <section id="steps">
+    <div class="wrap">
+      <div class="head">
+        <div><p class="eyebrow">Як проходить робота</p><h2 style="margin-top:18px" set:html={site.steps.title} /></div>
+      </div>
+      <ol class="steps">
+        {site.steps.items.map((s) => <li><h3>{s.title}</h3><p>{s.text}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section id="prices">
+    <div class="wrap">
+      <div class="head">
+        <div><p class="eyebrow">Формати і ціни</p><h2 style="margin-top:18px" set:html={site.prices.title} /></div>
+        <p class="lead">{site.prices.lead}</p>
+      </div>
+      <div class="plans">
+        {site.prices.plans.map((p) => (
+          <article class={p.featured ? 'plan feat' : 'plan'}>
+            <span class="tag">{p.tag}</span>
+            <h3>{p.name}</h3>
+            <div class="price">{p.price} {p.duration && <small>/ {p.duration}</small>}</div>
+            <ul>{p.features.map((f) => <li>{f}</li>)}</ul>
+            <a class={p.featured ? 'btn btn-fill' : 'btn btn-ghost'} href={dm} target="_blank" rel="noopener">{p.button}</a>
+          </article>
+        ))}
+      </div>
+      {site.prices.note && <p class="note">{site.prices.note}</p>}
+    </div>
+  </section>
+
+  <section id="ig">
+    <div class="wrap">
+      <div class="head">
+        <div><p class="eyebrow">Instagram</p><h2 style="margin-top:18px" set:html={site.instagram.title} /></div>
+        <a class="btn btn-ghost" href={igUrl} target="_blank" rel="noopener">@{ig} →</a>
+      </div>
+      <div class="ig">
+        {site.instagram.cards.map((c) => (
+          <a href={igUrl} target="_blank" rel="noopener"><img src={c.photo} alt="" loading="lazy" /><span>{c.text}</span></a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <p class="eyebrow">Питання</p>
+      <h2 style="margin:18px 0 44px">Часті <em>запитання</em></h2>
+      <div class="faq">
+        {site.faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <div>
+        <p class="eyebrow">Контакти</p>
+        <h2 set:html={site.contact.title} />
+        <p class="lead">{site.contact.lead}</p>
+        <div class="links">
+          <a href={dm} target="_blank" rel="noopener"><span>Написати в Direct</span><small>@{ig} →</small></a>
+          <a href={igUrl} target="_blank" rel="noopener"><span>Instagram</span><small>@{ig} →</small></a>
+          {tg && <a href={`https://t.me/${tg}`} target="_blank" rel="noopener"><span>Telegram</span><small>@{tg} →</small></a>}
+          {site.contacts.phone && <a href={`tel:${site.contacts.phone.replace(/[^+\d]/g, '')}`}><span>Телефон</span><small>{site.contacts.phone}</small></a>}
+          {site.contacts.email && <a href={`mailto:${site.contacts.email}`}><span>Пошта</span><small>{site.contacts.email}</small></a>}
+        </div>
+      </div>
+      <form id="lead" name="zayavka" method="POST" data-netlify="true" netlify-honeypot="company" action="/dyakuyu/">
+        <input type="hidden" name="form-name" value="zayavka" />
+        <p class="hp"><label for="f-company">Не заповнюйте<input id="f-company" name="company" tabindex="-1" autocomplete="off" /></label></p>
+        <h3>Залишити заявку</h3>
+        <label for="f-name">Ваше ім'я<input id="f-name" name="name" required autocomplete="given-name" /></label>
+        <label for="f-contact">Як з вами зв'язатися<input id="f-contact" name="contact" required placeholder="Instagram, Telegram або телефон" /></label>
+        <label for="f-topic">Що вас турбує
+          <select id="f-topic" name="topic">
+            {site.contact.form_topics.map((t) => <option>{t}</option>)}
+          </select>
+        </label>
+        <label for="f-msg">Кілька слів про запит (необов'язково)<textarea id="f-msg" name="message"></textarea></label>
+        <button class="btn btn-fill" type="submit">Надіслати заявку</button>
+        <p class="status" id="status" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© {new Date().getFullYear()} Мар'яна Мац · психологиня</span>
+    <a href={igUrl} target="_blank" rel="noopener">Instagram @{ig}</a>
+  </div>
+</footer>
+
+<script is:inline define:vars={{ thanks: site.contact.thanks }}>
+  (function () {
+    var b = document.getElementById('burger'), m = document.getElementById('menu');
+    b.addEventListener('click', function () { var o = m.classList.toggle('open'); b.setAttribute('aria-expanded', o); });
+    m.addEventListener('click', function (e) { if (e.target.tagName === 'A') { m.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); } });
+
+    var f = document.getElementById('lead'), st = document.getElementById('status');
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!f.name.value.trim() || !f.contact.value.trim()) { st.textContent = 'Вкажіть ім’я та контакт, щоб я могла відповісти.'; return; }
+      st.textContent = 'Надсилаю…';
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(f)).toString() })
+        .then(function (r) { if (!r.ok) throw 0; f.reset(); st.textContent = thanks; })
+        .catch(function () { st.textContent = 'Не вдалося надіслати. Напишіть мені, будь ласка, в Instagram.'; });
+    });
+  })();
+</script>
+</body>
+</html>

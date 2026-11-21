@@ -1,0 +1,21 @@
+---
+import site from '../content/site.json';
+import '../styles.css';
+---
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Дякую — {site.seo.title}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;1,300&family=Manrope:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <main class="wrap" style="min-height:100svh;display:grid;place-content:center;gap:24px;text-align:center">
+    <h1 style="font-size:clamp(40px,6vw,72px)">Дякую!</h1>
+    <p class="lead" style="margin:0 auto">{site.contact.thanks}</p>
+    <p><a class="btn btn-ghost" href="/">На головну</a></p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,173 @@
+backend:
+  name: github
+  repo: owl-88/mats-site
+  branch: main
+
+locale: uk
+site_url: /
+media_folder: public/images
+public_folder: /images
+
+collections:
+  - name: site
+    label: Сайт
+    editor:
+      preview: false
+    files:
+      - name: content
+        label: Тексти, фото і ціни
+        file: src/content/site.json
+        fields:
+          - label: Головний екран
+            name: hero
+            widget: object
+            collapsed: false
+            fields:
+              - { label: Надпис над заголовком, name: eyebrow, widget: string }
+              - { label: Заголовок (рядок 1), name: title_line1, widget: string }
+              - { label: Заголовок (рядок 2, золотий курсив), name: title_line2, widget: string }
+              - { label: Перше речення (жирне), name: lead_bold, widget: string }
+              - { label: Текст, name: lead, widget: text }
+              - { label: Текст кнопки, name: button, widget: string }
+              - { label: Фото, name: photo, widget: image }
+              - label: Цифри під кнопками
+                name: facts
+                widget: list
+                fields:
+                  - { label: Цифра, name: number, widget: string }
+                  - { label: Підпис, name: text, widget: string }
+
+          - label: Формати і ціни
+            name: prices
+            widget: object
+            fields:
+              - { label: Заголовок, name: title, widget: string, hint: "Слова в <em>...</em> будуть золотим курсивом" }
+              - { label: Підзаголовок, name: lead, widget: string }
+              - { label: Примітка під цінами, name: note, widget: string, required: false }
+              - label: Тарифи
+                name: plans
+                widget: list
+                summary: "{{fields.name}}: {{fields.price}}"
+                fields:
+                  - { label: Мітка зверху, name: tag, widget: string }
+                  - { label: Назва, name: name, widget: string }
+                  - { label: Ціна, name: price, widget: string, hint: "Наприклад: 1500 грн" }
+                  - { label: Тривалість, name: duration, widget: string, required: false }
+                  - { label: Що входить, name: features, widget: list, field: { label: Пункт, name: item, widget: string } }
+                  - { label: Текст кнопки, name: button, widget: string }
+                  - { label: Виділити, name: featured, widget: boolean, default: false }
+
+          - label: Контакти
+            name: contacts
+            widget: object
+            fields:
+              - { label: Instagram (без @), name: instagram, widget: string }
+              - { label: Telegram (без @), name: telegram, widget: string, required: false }
+              - { label: Телефон, name: phone, widget: string, required: false }
+              - { label: Пошта, name: email, widget: string, required: false }
+
+          - label: Цитата
+            name: quote
+            widget: object
+            fields:
+              - { label: Текст, name: text, widget: string }
+              - { label: Фото тла, name: photo, widget: image }
+
+          - label: Про мене
+            name: about
+            widget: object
+            fields:
+              - { label: Заголовок, name: title, widget: string, hint: "Слова в <em>...</em> будуть золотим курсивом" }
+              - { label: Фото, name: photo, widget: image }
+              - { label: Підпис під фото, name: caption, widget: string }
+              - label: Абзаци
+                name: paragraphs
+                widget: list
+                fields:
+                  - { label: Текст, name: text, widget: text }
+              - label: Історія (кроки)
+                name: story
+                widget: list
+                summary: "{{fields.when}}: {{fields.title}}"
+                fields:
+                  - { label: Коли, name: when, widget: string }
+                  - { label: Заголовок, name: title, widget: string }
+                  - { label: Текст, name: text, widget: text }
+
+          - label: З чим працюю
+            name: topics
+            widget: object
+            fields:
+              - { label: Заголовок, name: title, widget: string }
+              - { label: Підзаголовок, name: lead, widget: text }
+              - label: Теми
+                name: items
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: Назва, name: title, widget: string }
+                  - { label: Опис, name: text, widget: text }
+
+          - label: Підхід
+            name: approach
+            widget: object
+            fields:
+              - { label: Заголовок, name: title, widget: string }
+              - { label: Текст, name: lead, widget: text }
+              - { label: Фото, name: photo, widget: image }
+              - label: Опори
+                name: pillars
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: Назва, name: title, widget: string }
+                  - { label: Опис, name: text, widget: text }
+
+          - label: Як проходить робота
+            name: steps
+            widget: object
+            fields:
+              - { label: Заголовок, name: title, widget: string }
+              - label: Кроки
+                name: items
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: Назва, name: title, widget: string }
+                  - { label: Опис, name: text, widget: text }
+
+          - label: Блок Instagram
+            name: instagram
+            widget: object
+            fields:
+              - { label: Заголовок, name: title, widget: string }
+              - label: Картки
+                name: cards
+                widget: list
+                fields:
+                  - { label: Фото, name: photo, widget: image }
+                  - { label: Підпис, name: text, widget: string }
+
+          - label: Питання та відповіді
+            name: faq
+            widget: list
+            summary: "{{fields.q}}"
+            fields:
+              - { label: Питання, name: q, widget: string }
+              - { label: Відповідь, name: a, widget: text }
+
+          - label: Блок контактів і форма
+            name: contact
+            widget: object
+            fields:
+              - { label: Заголовок, name: title, widget: string }
+              - { label: Текст, name: lead, widget: text }
+              - { label: Теми у формі, name: form_topics, widget: list, field: { label: Тема, name: t, widget: string } }
+              - { label: Повідомлення після надсилання, name: thanks, widget: string }
+
+          - label: Пошук Google
+            name: seo
+            widget: object
+            fields:
+              - { label: Назва сайту у вкладці, name: title, widget: string }
+              - { label: Опис для Google, name: description, widget: text }
